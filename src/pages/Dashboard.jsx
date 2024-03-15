@@ -1,12 +1,11 @@
-import React from 'react';
+import Banner from '../components/Banner';
+import Header from '../components/Header';
+import PropertyList from '../components/PropertyList';
 
 const Dashboard = () => {
   return (
     <div>
-      <div
-        class="w-full h-[350px] bg-[url('kitchen.jpg')]
-            bg-cover bg-no-repeat bg-center relative mt-10"
-      ></div>
+      <PropertyList />
     </div>
   );
 };

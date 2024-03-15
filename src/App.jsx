@@ -13,7 +13,7 @@ function App() {
     <>
       <Routes>
         <Route path='/' element={<DefaultLayout />}>
-          <Route path='/' element={<Navigate to={'/users'} />} />
+          <Route path='/' element={<Navigate to={'/dashboard'} />} />
           <Route path='users' element={<Users />} />
           <Route path='dashboard' element={<Dashboard />} />
         </Route>
