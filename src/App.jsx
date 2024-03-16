@@ -7,6 +7,9 @@ import Login from './pages/Login';
 import Users from './pages/Users';
 import TenantSignUp from './pages/TenantSignUp';
 import LandlordSignup from './pages/LandlordSignup';
+import Tenants from './pages/Tenants';
+import Landlords from './pages/Landlords';
+import Properties from './pages/Properties';
 
 function App() {
   return (
@@ -16,6 +19,9 @@ function App() {
           <Route path='/' element={<Navigate to={'/dashboard'} />} />
           <Route path='users' element={<Users />} />
           <Route path='dashboard' element={<Dashboard />} />
+          <Route path='tenants' element={<Tenants />} />
+          <Route path='landlords' element={<Landlords />} />
+          <Route path='properties' element={<Properties />} />
         </Route>
         <Route path='*' element={<ErrorComponent />} />
         <Route path='/login' element={<GuestLayout />}>

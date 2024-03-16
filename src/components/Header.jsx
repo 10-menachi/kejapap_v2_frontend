@@ -1,12 +1,15 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useStateContext } from '../context/ContextProvider';
 import axiosClient from '../utils/axios-client';
 
 const Header = () => {
-  const { currentUser } = useStateContext();
+  const { currentUser, setUser, setToken } = useStateContext();
   const onLogout = () => {
-    axiosClient.post();
+    axiosClient.post('/logout');
+    setUser(null);
+    setToken(null);
   };
+  const navigate = useNavigate();
   return (
     <nav className='p-4 flex items-center justify-between flex-wrap gap-2 w-full bg-white border-b border-gray-200'>
       <div className='flex items-center gap-6 flex-wrap w-fit'>
@@ -50,18 +53,25 @@ const Header = () => {
         >
           Feed Back
         </Link>
-        {currentUser.role === 'admin' && (
-          <select
-            name='house_type'
-            id='selectLocation'
-            className='p-1 rounded-lg focus-none outline-none bg-white font-semibold text-gray-700 hover:text-[#3E2093]'
-          >
-            <option value=''>Admin</option>
-            <option value='/landlords'>Landlords</option>
-            <option value='/tenants'>Tenants</option>
-            <option value='/properties'>Properties</option>
-          </select>
-        )}
+        {currentUser.role === 'admin' ||
+          (currentUser.role === 'landlord' && (
+            <select
+              name='house_type'
+              id='selectLocation'
+              className='p-1 rounded-lg focus-none outline-none bg-white font-semibold text-gray-700 hover:text-[#3E2093]'
+              onChange={(e) => {
+                const selectedValue = e.target.value;
+                if (selectedValue) {
+                  navigate(selectedValue);
+                }
+              }}
+            >
+              <option value=''>Admin</option>
+              <option value='/landlords'>Landlords</option>
+              <option value='/tenants'>Tenants</option>
+              <option value='/properties'>Properties</option>
+            </select>
+          ))}
       </div>
       <div className='flex gap-2 items-center md:mx-2'>
         <p className='text-gray-700 font-semibold hover:text-[#3E2093] cursor-pointer m-5'>
